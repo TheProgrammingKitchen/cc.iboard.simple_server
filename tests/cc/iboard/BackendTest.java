@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BackendTest {
 
-    private static TestBackend backend = new TestBackend();
+    private static final TestBackend backend = new TestBackend();
 
     @Test
     void testServerResponseToUnknownCommand() {

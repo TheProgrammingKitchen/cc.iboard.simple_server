@@ -8,7 +8,7 @@ package cc.iboard.backend;
  * @see Responder
  */
 public class TestBackend implements BackendInterface {
-    private Responder responder = new Responder();
+    private final Responder responder = new Responder();
 
     @Override
     public void start() {

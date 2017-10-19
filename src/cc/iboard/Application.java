@@ -7,7 +7,7 @@ import cc.iboard.backend.HttpBackend;
  * @see HttpBackend
  * see `run/run.sh`
  */
-public class Application {
+class Application {
 
     private static final int PORT = 8000;
 

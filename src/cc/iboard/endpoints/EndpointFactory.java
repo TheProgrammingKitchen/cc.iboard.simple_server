@@ -9,7 +9,7 @@ import java.util.Map;
 public enum EndpointFactory {
     INSTANCE;
 
-    private Map<String, Endpoint> handlers = new HashMap<String, Endpoint>();
+    private Map<String, Endpoint> handlers = new HashMap<>();
 
     public Endpoint createHandler(String handlerName) throws Exception {
        return newHandler(handlerName);

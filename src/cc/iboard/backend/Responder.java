@@ -24,7 +24,7 @@ import cc.iboard.endpoints.Index;
  *        return responder.getBody(path);
  *  }</pre>
  */
-public class Responder {
+class Responder {
 
     /**
      * @param path    the first part of the path, eg `/index` is used to find the proper `Endpoint`.
@@ -33,7 +33,7 @@ public class Responder {
      * @see Responder
      */
     public String getBody(String path) {
-        Endpoint endpoint = null;
+        Endpoint endpoint;
 
         if (path.equals("/") || path.equals(""))
             endpoint = new Index();

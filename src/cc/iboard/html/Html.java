@@ -20,7 +20,7 @@ public class Html {
      * @param headers everythin in between
      * @return String
      */
-    public static String head(String headers) {
+    private static String head(String headers) {
         return "<head>\n" + headers + "\n" + "</head>\n";
     }
 
@@ -29,7 +29,7 @@ public class Html {
      * @param url of the css-file
      * @return String
      */
-    public static String stylesheet(String url) {
+    private static String stylesheet(String url) {
         return "<link rel=\"stylesheet\" href=\"" + url + "\" />";
 
     }

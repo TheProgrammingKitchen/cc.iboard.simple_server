@@ -38,8 +38,8 @@ public class HttpBackend implements BackendInterface {
 
     private int port = 8000 ;
     private static HttpServer server;
-    private Logger logger = Logger.getLogger(this.getClass().getName());
-    private static Responder responder = new Responder();
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private static final Responder responder = new Responder();
 
     public HttpBackend(int port) {
         this.port = port;
@@ -122,7 +122,7 @@ public class HttpBackend implements BackendInterface {
             sendResponse(t, response);
         }
 
-        public String serve(String msg) {
+        String serve(String msg) {
             return responder.getBody(msg);
         }
 

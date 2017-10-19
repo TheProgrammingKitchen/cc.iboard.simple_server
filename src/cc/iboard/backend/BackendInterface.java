@@ -10,8 +10,8 @@ package cc.iboard.backend;
  * @see Responder
  * @see TestBackend
  */
-public interface BackendInterface {
-    public void start();
-    public String handle(String requestString);
-    public void stop();
+interface BackendInterface {
+    void start();
+    String handle(String requestString);
+    void stop();
 }
