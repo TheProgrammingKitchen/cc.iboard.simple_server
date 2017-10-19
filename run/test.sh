@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-JAVA="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java"
+if test -z ${JAVA}
+then
+  JAVA="/usr/bin/java"
+else
+  JAVA=${JAVA}
+fi
+
 PROJECT="./out/production/cc.iboard.simple_server:./out/test/cc.iboard.simple_server"
 
 CLASSPATH="./:$PROJECT"
