@@ -22,6 +22,18 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+// IGNORE COVERAGE IN THIS FILE - See description above
+
+
+/**
+ * The `HttpBackend` starts a simple http-server and
+ * a handler for path /*
+ * the path is passed to `Responder.handle(path)`
+ *
+ * The server will not be stopped and blocks until
+ * Ctrl-C is pressed by the user or the process is killed.
+ */
 public class HttpBackend implements BackendInterface {
 
     private int port = 8000 ;
@@ -52,14 +64,16 @@ public class HttpBackend implements BackendInterface {
         server.stop(0);
     }
 
+
+
+    // IMPLEMENTATION
+
     private static void sendResponse(HttpExchange t, String response) throws IOException {
         t.sendResponseHeaders(200, response.length());
         OutputStream os = t.getResponseBody();
         os.write(response.getBytes());
         os.close();
     }
-
-    // IMPLEMENTATION
 
     private static String buildRequest(HttpExchange t) {
         String path = extractPath(t);

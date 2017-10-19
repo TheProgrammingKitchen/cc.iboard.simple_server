@@ -1,6 +1,13 @@
 package cc.iboard.html;
 
+/**
+ * Some HTML-Helper methods.
+ */
 public class Html {
+
+    /**
+     * @return String html head with stylesheets
+     */
     public static String getHeader() {
         return head(
                 stylesheet( "https://s3.eu-central-1.amazonaws.com/iboard.core/static/iboard.css"  )
@@ -8,35 +15,71 @@ public class Html {
 
     }
 
+    /**
+     * Wrapper for {@code<head>....</head>}
+     * @param headers everythin in between
+     * @return String
+     */
     public static String head(String headers) {
         return "<head>\n" + headers + "\n" + "</head>\n";
     }
 
+    /**
+     * Return a link rel for the given css file
+     * @param url of the css-file
+     * @return String
+     */
     public static String stylesheet(String url) {
         return "<link rel=\"stylesheet\" href=\"" + url + "\" />";
 
     }
 
+    /**
+     * @return String – the title of the html-page
+     */
     public static String title() {
         return "iboard.cc - index";
     }
 
+    /**
+     * Wrapper for h1 tags
+     * @param text inside H1
+     * @return String with text inside H1 tag
+     */
     public static String h1(String text) {
         return "<h1>" + text + "</h1>";
     }
 
+    /**
+     * Body Wrapper
+     * @param content everything in between
+     * @return the body of the html-page
+     */
     public static String body(String content) {
         return "<body>\n" + content + "\n</body>";
     }
 
-    public static String page(String content) {
+    /**
+     * Wrapper for the entire html-page
+     * @param content of the page
+     * @return The entire html-respond body
+     */
+    public static String html(String content) {
         return "<html>\n" + content + "\n</html>";
     }
 
+    /**
+     * Wrapper for p-tags
+     * @param text the text inside <p>...</p>
+     * @return the paragraph string
+     */
     public static String p(String text) {
         return "<p>" + text + "</p>\n";
     }
 
+    /**
+     * @return some longer text to be used for mockups.
+     */
     public static String lorem() {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                 "In convallis euismod quam sit amet lobortis. Ut auctor " +

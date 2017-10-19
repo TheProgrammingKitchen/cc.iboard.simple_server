@@ -1,5 +1,12 @@
 package cc.iboard.backend;
 
+/**
+ * `start` and `stop` of `TestBackend` are NOOPs.
+ * `handle(requestStr)` delegates the request to
+ * the `Responder.getBody` method.
+ *
+ * @see Responder
+ */
 public class TestBackend implements BackendInterface {
     private Responder responder = new Responder();
 

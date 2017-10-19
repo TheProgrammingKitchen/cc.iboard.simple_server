@@ -9,7 +9,7 @@ public class Index extends Endpoint {
     }
 
     private String getHTMLBody() {
-        return Html.page(
+        return Html.html(
           Html.body(
               Html.h1( Html.title() )
               .concat(Html.p(Html.lorem()))

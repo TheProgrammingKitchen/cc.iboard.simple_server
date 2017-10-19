@@ -34,6 +34,15 @@ class BackendTest {
         assertTrue(response.contains(Html.title()));
     }
 
+    @Test
+    void testTestBackendImplementation() {
+        // Because Java is stupid and we have to overwrite
+        // abstract methods even if not needed.
+        backend.start();
+        backend.stop();
+        assertTrue(true);
+    }
+
     private String send(String msg) {
         return backend.handle(msg);
     }

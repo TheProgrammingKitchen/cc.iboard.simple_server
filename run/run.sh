@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+
+#
+# This file must be started in project's root directory
+# not inside `./run/` !
+#
+
 if test -z ${JAVA}
 then
   JAVA="/usr/bin/java"

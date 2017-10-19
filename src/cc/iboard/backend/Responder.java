@@ -8,23 +8,21 @@ import cc.iboard.endpoints.Index;
  *  <p>
  *      The `Responder` tries to create a `Endpoint` from the path given
  *  as a parameter.
- *  </p>
  *  <p>
  *      The default endpoints is `Index` for "/" and "".
  *  If a path is given, this path is passed to the `EndpointFactory` which
  *  returns a `Endpoint` for the given path.
- *  </p>
  *  <p>
  *      Finally, when a `Endpoint` was found, the `Responder` calls `respond()`
  *  on this `Endpoint` to return the calculated "body".
- *  </p>
  *
+ *  <p>
  *  Example:
- *  <pre>
- *     private Responder responder = new Responder();
- *     ....
- *     return responder.getBody(path);
- *  </pre>
+ *  <pre>{@code
+ *        private Responder responder = new Responder();
+ *        //....
+ *        return responder.getBody(path);
+ *  }</pre>
  */
 public class Responder {
 

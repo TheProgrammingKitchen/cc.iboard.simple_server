@@ -2,6 +2,11 @@ package cc.iboard;
 
 import cc.iboard.backend.HttpBackend;
 
+/**
+ * Start an HttpBackend from the command-line
+ * @see HttpBackend
+ * see `run/run.sh`
+ */
 public class Application {
 
     private static final int PORT = 8000;
