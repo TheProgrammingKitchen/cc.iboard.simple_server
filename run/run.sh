@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
-JAVA="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java"
+if test -z ${JAVA}
+then
+  JAVA="/usr/bin/java"
+else
+  JAVA=${JAVA}
+fi
 
 OPTS="-Dfile.encoding=UTF-8"
-CLASSPATH="/Users/aa/dev/IdeaProjects/cc.iboard.simple_server/out/test/cc.iboard/"
+CLASSPATH="./:./out/production/cc.iboard.simple_server"
 
-$JAVA -classpath $CLASSPATH $OPTS cc.iboard.BackendTest $*
+$JAVA -classpath $CLASSPATH $OPTS cc.iboard.Application
 
