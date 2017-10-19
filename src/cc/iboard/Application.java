@@ -8,9 +8,13 @@ public class Application {
 
     public static void main(String[] args) {
         HttpBackend backend = new HttpBackend(PORT);
-        System.out.println("Starting server at port " + PORT);
+        try {
+            System.out.println("Starting server at port " + PORT);
+            backend.start();
+        } catch (NullPointerException e) {
+            System.out.println("Can't start new server.");
+        }
         System.out.println("You can open http://localhost:" + PORT);
-        backend.start();
     }
 
 
