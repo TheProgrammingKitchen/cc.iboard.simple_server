@@ -73,23 +73,28 @@ public class HttpBackend implements BackendInterface {
         os.close();
     }
 
-    private static String buildRequest(HttpExchange t) {
+    private static String getHandlerName(HttpExchange t) {
         String path = extractPath(t);
-        if ( path.equals("/") )
+        if ( isRootPath(path) )
             return "Index";
-        else
-            return upcaseFirstChar(path);
+        
+		// TODO: ignore subpath and params
+		return upcaseFirstChar(path);
     }
+
+
+	private static boolean isRootPath(String path) {
+		return path.equals("/");
+	}
     
     private static String extractMethod(HttpExchange t) {
 		return t.getRequestMethod().toUpperCase();
 	}
 
-
 	private static String upcaseFirstChar(String path) {
-        String req = path.substring(2);
-        String first = path.substring(1,2);
-        return first.toUpperCase() + req;
+        String req = path.substring(2);     // ignore slash and first character
+        String first = path.substring(1,2); // get the first character
+        return first.toUpperCase() + req;   // Upcase first character and append the rest
     }
 
     private static String extractPath(HttpExchange t) {
@@ -121,12 +126,12 @@ public class HttpBackend implements BackendInterface {
 
         @Override
         public void handle(HttpExchange t) throws IOException {
-            Response response = serve(extractMethod(t), buildRequest(t));
+            Response response = serve(extractMethod(t), getHandlerName(t));
             sendResponse(t, response);
         }
 
-        Response serve(String method, String msg) {
-            return responder.respondTo(method,msg);
+        Response serve(String method, String path) {
+            return responder.respondTo(method,path);
         }
 
     }

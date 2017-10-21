@@ -6,11 +6,10 @@ import cc.iboard.html.Html;
 public class Index extends Endpoint {
     @Override
     public Response respond() {
-        new Html();
-		return new Response(Response.HTTP_OK, Html.getHeader() + getHTMLBody());
+		return new Response(Response.HTTP_OK, Html.getHeader() + buildHTMLBody());
     }
 
-    private String getHTMLBody() {
+    private String buildHTMLBody() {
         return Html.html(
           Html.body(
               Html.h1( Html.title() )

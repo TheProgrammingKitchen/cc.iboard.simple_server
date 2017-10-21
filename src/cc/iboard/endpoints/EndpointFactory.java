@@ -1,5 +1,6 @@
 package cc.iboard.endpoints;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -16,13 +17,13 @@ public enum EndpointFactory {
 
     private Endpoint newHandler(String handlerName) throws Exception {
         try {
-            return instantiateHandlerByName(handlerName);
+            return newHandlerByName(handlerName);
         } catch (Exception e) {
             throw new Exception("Endpoint not found: " + handlerName + e.getMessage());
         }
     }
 
-    private Endpoint instantiateHandlerByName(String handlerName)
+    private Endpoint newHandlerByName(String handlerName)
             throws IllegalArgumentException, 
             		   InvocationTargetException, 
             		   NoSuchMethodException, 
@@ -31,10 +32,20 @@ public enum EndpointFactory {
             		   IllegalAccessException, 
             		   ClassNotFoundException
     {
-        Endpoint endpoint;
-        String name = Endpoint.class.getPackage().getName();
-        endpoint = (Endpoint) Class.forName(name+"."+handlerName).getDeclaredConstructor().newInstance();
-        return endpoint;
+		String className = getClassName(handlerName);
+		return (Endpoint) getConstructor(className).newInstance();
     }
+
+	private Constructor<?> getConstructor(String className) throws NoSuchMethodException, ClassNotFoundException {
+		return Class.forName(className).getDeclaredConstructor();
+	}
+
+	private String getClassName(String handlerName) {
+		return getPackageName() + "." + handlerName;
+	}
+
+	private String getPackageName() {
+		return Endpoint.class.getPackage().getName();
+	}
 
 }

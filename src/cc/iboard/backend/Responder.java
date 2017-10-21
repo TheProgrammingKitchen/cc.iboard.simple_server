@@ -37,7 +37,7 @@ class Responder {
     public Response respondTo(String _method, String path) {
         Endpoint endpoint;
 
-        if (path.equals("/") || path.equals(""))
+        if (isRootPath(path))
             endpoint = new Index();
         else try {
             endpoint = EndpointFactory.INSTANCE.createHandler(path);
@@ -47,6 +47,10 @@ class Responder {
 
         return endpoint.respond();
     }
+
+	private boolean isRootPath(String path) {
+		return path.equals("/") || path.equals("");
+	}
 
 	private String render404(String path) {
 		return Html.html(
