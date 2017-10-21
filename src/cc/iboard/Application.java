@@ -9,7 +9,7 @@ import cc.iboard.backend.HttpBackend;
  */
 class Application {
 
-    private static final int PORT = 8000;
+    private static final int PORT = 4000;
 
     public static void main(String[] args) {
         HttpBackend backend = new HttpBackend(PORT);

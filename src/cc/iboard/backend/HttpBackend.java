@@ -1,5 +1,3 @@
-// TODO: Review this untested code
-
 /*
    The HTTP-Backend is responsible to extract the request from
    the http-input, create a Endpoint and execute it.
@@ -36,7 +34,7 @@ import java.util.logging.Logger;
  */
 public class HttpBackend implements BackendInterface {
 
-    private int port = 8000 ;
+	private int port = 8000 ;
     private static HttpServer server;
     private final Logger logger = Logger.getLogger(this.getClass().getName());
     private static final Responder responder = new Responder();
@@ -55,7 +53,7 @@ public class HttpBackend implements BackendInterface {
     }
 
     @Override
-    public String handle(String requestString) {
+    public Response handle(String _method, String requestString) {
         return directCallWarning(requestString);
     }
 
@@ -68,10 +66,10 @@ public class HttpBackend implements BackendInterface {
 
     // IMPLEMENTATION
 
-    private static void sendResponse(HttpExchange t, String response) throws IOException {
-        t.sendResponseHeaders(200, response.length());
+    private static void sendResponse(HttpExchange t, Response response) throws IOException {
+        t.sendResponseHeaders(response.status(), response.body().length());
         OutputStream os = t.getResponseBody();
-        os.write(response.getBytes());
+        os.write(response.body().getBytes());
         os.close();
     }
 
@@ -82,8 +80,13 @@ public class HttpBackend implements BackendInterface {
         else
             return upcaseFirstChar(path);
     }
+    
+    private static String extractMethod(HttpExchange t) {
+		return t.getRequestMethod().toUpperCase();
+	}
 
-    private static String upcaseFirstChar(String path) {
+
+	private static String upcaseFirstChar(String path) {
         String req = path.substring(2);
         String first = path.substring(1,2);
         return first.toUpperCase() + req;
@@ -107,23 +110,23 @@ public class HttpBackend implements BackendInterface {
         server.start();
     }
 
-    private String directCallWarning(String requestString) {
+    private Response directCallWarning(String requestString) {
         String msg = "Backend Handle was called directly in HttpBackend with: " +
                 requestString;
         logger.log(Level.WARNING,msg);
-        return msg;
+        return new Response(Response.HTTP_FORBIDDEN, msg);
     }
 
     static class RootHandler implements HttpHandler {
 
         @Override
         public void handle(HttpExchange t) throws IOException {
-            String response = serve(buildRequest(t));
+            Response response = serve(extractMethod(t), buildRequest(t));
             sendResponse(t, response);
         }
 
-        String serve(String msg) {
-            return responder.getBody(msg);
+        Response serve(String method, String msg) {
+            return responder.respondTo(method,msg);
         }
 
     }

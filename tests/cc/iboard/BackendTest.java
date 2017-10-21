@@ -1,6 +1,7 @@
 package cc.iboard;
 
 import cc.iboard.backend.TestBackend;
+import cc.iboard.backend.Response;
 import cc.iboard.html.Html;
 import org.junit.jupiter.api.*;
 
@@ -12,26 +13,28 @@ class BackendTest {
 
     @Test
     void testServerResponseToUnknownCommand() {
-        assertEquals("404 No endpoints found for: Unknown Command", send("Unknown Command"));
+    	    Response response = send("unknown command");
+        assertTrue(response.body().contains("404 - Page Not Found"));
+        assertEquals(404, response.status());
     }
 
     @Test
     void testStateResponse() {
-        String response = send("State");
-        assertTrue(response.contains("Running"));
+        Response response = send("State");
+        assertTrue(response.body().contains("Running"));
     }
     @Test
     void testIndexPageResponse() {
-        String response = send("Index");
-        assertTrue(response.contains("<html>"));
-        assertTrue(response.contains(Html.title()));
+        Response response = send("Index");
+        assertTrue(response.body().contains("<html>"));
+        assertTrue(response.body().contains(Html.title()));
     }
 
     @Test
     void testDefaultPageResponse() {
-        String response = send("/");
-        assertTrue(response.contains("<html>"));
-        assertTrue(response.contains(Html.title()));
+        Response response = send("/");
+        assertTrue(response.body().contains("<html>"));
+        assertTrue(response.body().contains(Html.title()));
     }
 
     @Test
@@ -43,7 +46,7 @@ class BackendTest {
         assertTrue(true);
     }
 
-    private String send(String msg) {
-        return backend.handle(msg);
+    private Response send(String path) {
+        return backend.handle("GET", path);
     }
 }

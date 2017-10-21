@@ -1,11 +1,13 @@
 package cc.iboard.endpoints;
 
+import cc.iboard.backend.Response;
 import cc.iboard.html.Html;
 
 public class Index extends Endpoint {
     @Override
-    public String respond() {
-        return new Html().getHeader() + getHTMLBody();
+    public Response respond() {
+        new Html();
+		return new Response(Response.HTTP_OK, Html.getHeader() + getHTMLBody());
     }
 
     private String getHTMLBody() {

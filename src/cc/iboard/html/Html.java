@@ -99,4 +99,8 @@ public class Html {
                 "lacinia porta lectus.\n" +
                 "\n";
     }
+
+	public static String a(String title, String link) {
+		return "<a href=\"" + link + "\">" + title + "</a>"; 
+	}
 }

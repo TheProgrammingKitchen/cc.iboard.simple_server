@@ -1,5 +1,7 @@
 package cc.iboard.endpoints;
 
+import cc.iboard.backend.Response;
+
 /**
  * Derive from class `Endpoint` to handle your requests.
  * Example:
@@ -12,5 +14,5 @@ package cc.iboard.endpoints;
  * @see State
  */
 public abstract class Endpoint {
-    public abstract String respond();
+    public abstract Response respond();
 }

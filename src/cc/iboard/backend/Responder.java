@@ -3,6 +3,7 @@ package cc.iboard.backend;
 import cc.iboard.endpoints.Endpoint;
 import cc.iboard.endpoints.EndpointFactory;
 import cc.iboard.endpoints.Index;
+import cc.iboard.html.Html;
 
 /**
  *  <p>
@@ -28,11 +29,12 @@ class Responder {
 
     /**
      * @param path    the first part of the path, eg `/index` is used to find the proper `Endpoint`.
+     * @param msg 
      * @return String the body returned from the `Endpoint.respond()` function.
      * @see Endpoint
      * @see Responder
      */
-    public String getBody(String path) {
+    public Response respondTo(String _method, String path) {
         Endpoint endpoint;
 
         if (path.equals("/") || path.equals(""))
@@ -40,10 +42,21 @@ class Responder {
         else try {
             endpoint = EndpointFactory.INSTANCE.createHandler(path);
         } catch (Exception e) {
-            return "404 No endpoints found for: " + path;
+            return new Response(Response.HTTP_NOT_FOUND,render404(path));
         }
 
         return endpoint.respond();
     }
+
+	private String render404(String path) {
+		return Html.html(
+			       Html.getHeader() +
+			       Html.body(
+			         Html.h1("404 - Page Not Found") +
+			         Html.p("There is no page at " + path + ".<br/> " +
+			           Html.a("Goto the Homepage", "/"))
+			          )
+			   );
+	}
 
 }

@@ -16,8 +16,8 @@ public class TestBackend implements BackendInterface {
     }
 
     @Override
-    public String handle(String requestString) {
-        return responder.getBody(requestString);
+    public Response handle(String method, String requestString) {
+        return responder.respondTo(method, requestString);
     }
 
     @Override
