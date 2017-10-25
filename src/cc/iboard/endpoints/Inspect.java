@@ -7,7 +7,7 @@ import cc.iboard.backend.Request;
 import cc.iboard.backend.Response;
 import cc.iboard.html.Html;
 
-public class Echo extends Endpoint {
+public class Inspect extends Endpoint {
     @Override
     public Response respond(Request request) {
 		return new Response(Response.HTTP_OK, Html.getHeader() + buildHTMLBody(request));
