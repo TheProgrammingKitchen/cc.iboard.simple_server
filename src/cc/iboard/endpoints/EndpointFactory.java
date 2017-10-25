@@ -2,6 +2,7 @@ package cc.iboard.endpoints;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Pattern;
 
 /**
  * The singleton `EndpointFactory` creates a class which is derived from `Endpoint`.
@@ -9,7 +10,12 @@ import java.lang.reflect.InvocationTargetException;
 public enum EndpointFactory {
     INSTANCE;
 
-    public Endpoint createHandler(String handlerName) throws Exception {
+    public Endpoint createEndpoint(String queryString) throws Exception {
+       String[] parts = queryString.split("\\?", Pattern.LITERAL);
+       String path = parts[0];
+       //String _params = parts[1];
+       parts = path.split("\\/");
+       String handlerName = parts[0];
        return newHandler(handlerName);
     }
 

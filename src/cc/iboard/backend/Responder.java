@@ -34,18 +34,19 @@ class Responder {
      * @see Endpoint
      * @see Responder
      */
-    public Response respondTo(String _method, String path) {
+    public Response respondTo(String method, String path) {
         Endpoint endpoint;
+        Request request = new Request(method,path);
 
         if (isRootPath(path))
             endpoint = new Index();
         else try {
-            endpoint = EndpointFactory.INSTANCE.createHandler(path);
+            endpoint = EndpointFactory.INSTANCE.createEndpoint(path);
         } catch (Exception e) {
             return new Response(Response.HTTP_NOT_FOUND,render404(path));
         }
 
-        return endpoint.respond();
+        return endpoint.respond(request);
     }
 
 	private boolean isRootPath(String path) {

@@ -9,16 +9,16 @@
  */
 package cc.iboard.backend;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
 
 
 // IGNORE COVERAGE IN THIS FILE - See description above
@@ -99,7 +99,7 @@ public class HttpBackend implements BackendInterface {
 
     private static String extractPath(HttpExchange t) {
         URI uri = t.getRequestURI();
-        return uri.getPath();
+        return uri.getQuery();
     }
 
     private void createHttpServer() {

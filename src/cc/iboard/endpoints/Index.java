@@ -1,11 +1,12 @@
 package cc.iboard.endpoints;
 
+import cc.iboard.backend.Request;
 import cc.iboard.backend.Response;
 import cc.iboard.html.Html;
 
 public class Index extends Endpoint {
     @Override
-    public Response respond() {
+    public Response respond(Request request) {
 		return new Response(Response.HTTP_OK, Html.getHeader() + buildHTMLBody());
     }
 

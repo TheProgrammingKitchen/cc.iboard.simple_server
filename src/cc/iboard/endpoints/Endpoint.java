@@ -1,5 +1,6 @@
 package cc.iboard.endpoints;
 
+import cc.iboard.backend.Request;
 import cc.iboard.backend.Response;
 
 /**
@@ -14,5 +15,5 @@ import cc.iboard.backend.Response;
  * @see State
  */
 public abstract class Endpoint {
-    public abstract Response respond();
+    public abstract Response respond(Request request);
 }
