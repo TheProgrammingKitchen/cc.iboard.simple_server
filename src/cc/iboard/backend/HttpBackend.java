@@ -16,6 +16,8 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.junit.jupiter.api.Tag;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -32,6 +34,7 @@ import com.sun.net.httpserver.HttpServer;
  * The server will not be stopped and blocks until
  * Ctrl-C is pressed by the user or the process is killed.
  */
+ @Tag("DoNotTest")
 public class HttpBackend implements BackendInterface {
 
 	private int port = 8000 ;
@@ -74,16 +77,17 @@ public class HttpBackend implements BackendInterface {
     }
 
     private static String getHandlerName(HttpExchange t) {
-        String path = extractPath(t);
+        String path = extractPathWithQuery(t);
         if ( isRootPath(path) )
             return "Index";
         
-		// TODO: ignore subpath and params
 		return upcaseFirstChar(path);
     }
 
 
 	private static boolean isRootPath(String path) {
+	    if (path == null)
+	      return true;
 		return path.equals("/");
 	}
     
@@ -97,9 +101,9 @@ public class HttpBackend implements BackendInterface {
         return first.toUpperCase() + req;   // Upcase first character and append the rest
     }
 
-    private static String extractPath(HttpExchange t) {
+    private static String extractPathWithQuery(HttpExchange t) {
         URI uri = t.getRequestURI();
-        return uri.getQuery();
+        return uri.getPath() + "?" + uri.getQuery();
     }
 
     private void createHttpServer() {

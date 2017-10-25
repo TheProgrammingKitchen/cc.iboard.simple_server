@@ -19,7 +19,7 @@ class BackendTest {
         assertTrue(response.body().contains("404 - Page Not Found"));
         assertEquals(404, response.status());
     }
-
+    
     @Test
     void testStateResponse() {
         Response response = send("State");
