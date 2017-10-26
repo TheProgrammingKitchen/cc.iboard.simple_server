@@ -17,6 +17,6 @@ from project root.
 
 ### Command line
 
-* `./run/run.sh` and open `http://localhost:8000`
+* `./run/run.sh` and open `http://localhost:4000`
 * `./run/test.sh` to run all tests from command line
 
