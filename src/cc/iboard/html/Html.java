@@ -115,11 +115,42 @@ public class Html {
 				+ "\n";
 	}
 
+    /**
+     * Return a html-link
+     * @param title visible text
+     * @param link url-string
+     * @return
+     */
 	public static String a(String title, String link) {
 		return "<a href=\"" + link + "\">" + title + "</a>";
 	}
 
+    /**
+     * Wrap string with <pre>
+     * @param string
+     * @return
+     */
 	public static String pre(String string) {
 		return "<pre>" + string + "</pre>\n";
+	}
+
+    /**
+     * Render a standard page with the given title.
+     * If title is null, the default title, defined in this class will be used.
+     * @param titleString
+     * @param text
+     * @return
+     */
+	public static String renderPage(String titleString, String text) {
+		String title = titleString == null ? title() : titleString;
+		return getHeader()
+				.concat( 
+						html(
+								Html.body(
+										Html.h1( title)
+										.concat(Html.p(text))
+										)
+								)
+						);
 	}
 }

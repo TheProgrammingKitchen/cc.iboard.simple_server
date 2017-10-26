@@ -7,15 +7,18 @@ import cc.iboard.html.Html;
 
 /**
  *  <p>
- *      The `Requester` tries to create a `Endpoint` from the path given
+ *      The `Requester` creates an `Endpoint` from the request-string given
  *  as a parameter.
  *  <p>
- *      The default endpoints is `Index` for "/" and "".
- *  If a path is given, this path is passed to the `EndpointFactory` which
- *  returns a `Endpoint` for the given path.
+ *      The default Endpoint is `Index` for "/" and "".
+ *  If a request-string is given, this path is passed to the `EndpointFactory` which
+ *  returns an `Endpoint` for the given string.
  *  <p>
- *      Finally, when a `Endpoint` was found, the `Responder` calls `respond()`
- *  on this `Endpoint` to return the calculated "body".
+ *      Finally, when an `Endpoint` was found, the `Requestor` calls `request()`
+ *  on this `Endpoint` and returns the `Response`
+ *  <p>
+ *      If no Endpoint defined for the given request-string, a 404-response is
+ *  created.
  *
  *  <p>
  *  Example:
@@ -26,6 +29,9 @@ import cc.iboard.html.Html;
  *        println(response.body());   // Some text
  *        println(response.status()); // 200, 404, ...
  *  }</pre>
+ *  
+ *  @see Endpoint
+ *  @see Response
  */
 class Requester {
 

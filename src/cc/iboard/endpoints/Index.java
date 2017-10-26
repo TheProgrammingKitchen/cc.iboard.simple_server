@@ -5,17 +5,14 @@ import cc.iboard.backend.Response;
 import cc.iboard.html.Html;
 
 public class Index extends Endpoint {
-    @Override
+    private static final String DEFAULT_TITLE = null;
+
+	@Override
     public Response respond(Request request) {
-		return new Response(Response.HTTP_OK, Html.getHeader() + buildHTMLBody());
+		return new Response(Response.HTTP_OK, renderResponse());
     }
 
-    private String buildHTMLBody() {
-        return Html.html(
-          Html.body(
-              Html.h1( Html.title() )
-              .concat(Html.p(Html.lorem()))
-          )
-        );
+    private String renderResponse() {
+      return Html.renderPage(DEFAULT_TITLE, Html.lorem());
     }
 }

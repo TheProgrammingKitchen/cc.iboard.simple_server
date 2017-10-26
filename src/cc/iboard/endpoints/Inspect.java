@@ -1,35 +1,34 @@
 package cc.iboard.endpoints;
 
-import java.util.List;
-import java.util.Map.Entry;
-
 import cc.iboard.backend.Request;
 import cc.iboard.backend.Response;
 import cc.iboard.html.Html;
 
+/**
+ * Inspect-Endpoint responds with an inspection of the request.
+ * It shows the query, extracted parameters, and body.
+ */
 public class Inspect extends Endpoint {
     @Override
     public Response respond(Request request) {
-		return new Response(Response.HTTP_OK, Html.getHeader() + buildHTMLBody(request));
+		return new Response(Response.HTTP_OK, renderResponse(request));
     }
 
-    private String buildHTMLBody(Request request) {
-        return Html.html(
-          Html.body(
-              Html.h1( Html.title() )
-              .concat(Html.p("Request: " + request.path()))
-              .concat(Html.p("Parameters:"))
+    // IMPLEMENTATION
+    
+    private String renderResponse(Request request) {
+        return Html.renderPage("Inspect Request", 
+              ("Request: " + request.path())
+              .concat(Html.p("Query Parameters:"))
               .concat(listParameters(request))
-          )
-        );
+          );
     }
     
     private String listParameters(Request request) {
-      List<Entry<String, String>> params = request.parameters();
       StringBuilder output = new StringBuilder();
-      params.forEach( (Entry<String, String> param) -> {
+      request.parameters().map().forEach( (k,v) -> {
         output.append(
-          Html.pre(param.getKey() + " = " + param.getValue().toString())
+          Html.pre(k + " = " + v)
         );
       });
       return output.toString();
