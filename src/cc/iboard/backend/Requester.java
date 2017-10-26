@@ -49,7 +49,7 @@ class Requester {
 
 
     // IMPLEMENTATION
-    
+
     private Endpoint determineEndpoint(String path) {
         Endpoint endpoint;
         if (isRootPath(path))
@@ -62,8 +62,8 @@ class Requester {
         return endpoint;
     }
 
-	private boolean isRootPath(String path) {
-		return path.equals("/") || path.equals("");
-	}
+    private boolean isRootPath(String path) {
+        return path.equals("/") || path.equals("");
+    }
 
 }

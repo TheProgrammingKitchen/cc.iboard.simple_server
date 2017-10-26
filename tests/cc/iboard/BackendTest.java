@@ -15,11 +15,11 @@ class BackendTest {
 
     @Test
     void testServerResponseToUnknownCommand() {
-    	    Response response = send("unknown command");
+        Response response = send("unknown command");
         assertTrue(response.body().contains("404 - Page Not Found"));
         assertEquals(404, response.status());
     }
-    
+
     @Test
     void testStateResponse() {
         Response response = send("State");

@@ -12,6 +12,6 @@ package cc.iboard.backend;
  */
 interface BackendInterface {
     void start();
-	Response request(String method, String requestString);
+    Response request(String method, String requestString);
     void stop();
 }

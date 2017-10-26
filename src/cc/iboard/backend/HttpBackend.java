@@ -34,7 +34,7 @@ import com.sun.net.httpserver.HttpServer;
  */
 public class HttpBackend implements BackendInterface {
 
-	private int port = 8000 ;
+    private int port = 8000 ;
     private static HttpServer server;
     private final Logger logger = Logger.getLogger(this.getClass().getName());
     private static final Requester requester = new Requester();
@@ -73,35 +73,35 @@ public class HttpBackend implements BackendInterface {
         String path = extractPathWithQuery(t);
         if ( isRootPath(path) )
             return "Index";
-        
-		return upcaseFirstChar(path);
+
+        return upcaseFirstChar(path);
     }
 
 
-	private static boolean isRootPath(String path) {
-	    if (path == null)
-	      return true;
-		return path.equals("/");
-	}
-    
-    private static String extractMethod(HttpExchange t) {
-		return t.getRequestMethod().toUpperCase();
-	}
+    private static boolean isRootPath(String path) {
+        if (path == null)
+            return true;
+        return path.equals("/");
+    }
 
-	private static String upcaseFirstChar(String path) {
+    private static String extractMethod(HttpExchange t) {
+        return t.getRequestMethod().toUpperCase();
+    }
+
+    private static String upcaseFirstChar(String path) {
         String req = path.substring(2);     // ignore slash and first character
         String first = path.substring(1,2); // get the first character
         return first.toUpperCase() + req;   // Upcase first character and append the rest
     }
 
-	private static String extractPathWithQuery(HttpExchange t) {
-		URI uri = t.getRequestURI();
-		String query = uri.getQuery();
-		if (query == null) 
-			return uri.getPath();
-		else
-			return uri.getPath() + "?" + uri.getQuery();
-	}
+    private static String extractPathWithQuery(HttpExchange t) {
+        URI uri = t.getRequestURI();
+        String query = uri.getQuery();
+        if (query == null) 
+            return uri.getPath();
+        else
+            return uri.getPath() + "?" + uri.getQuery();
+    }
 
     private void createHttpServer() {
         try {
@@ -118,7 +118,7 @@ public class HttpBackend implements BackendInterface {
 
     private Response directCallWarning(String requestString) {
         String msg = "Backend Handle was called directly in HttpBackend with: " +
-                     requestString;
+                requestString;
         logger.log(Level.WARNING,msg);
         return new Response(Response.HTTP_FORBIDDEN, msg);
     }

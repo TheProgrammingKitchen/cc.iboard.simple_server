@@ -7,12 +7,12 @@ import cc.iboard.html.Html;
 public class Index extends Endpoint {
     private static final String DEFAULT_TITLE = null;
 
-	@Override
+    @Override
     public Response respond(Request request) {
-		return new Response(Response.HTTP_OK, renderResponse());
+        return new Response(Response.HTTP_OK, renderResponse());
     }
 
     private String renderResponse() {
-      return Html.renderPage(DEFAULT_TITLE, Html.lorem());
+        return Html.renderPage(DEFAULT_TITLE, Html.lorem());
     }
 }

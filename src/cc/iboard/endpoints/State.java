@@ -11,8 +11,8 @@ public class State extends Endpoint {
     @Override
     public Response respond(Request request) {
         return new Response(
-          Response.HTTP_OK, 
-          Html.renderPage("Status","Running")
-        );
+                Response.HTTP_OK, 
+                Html.renderPage("Status","Running")
+                );
     }
 }
