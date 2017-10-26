@@ -2,6 +2,17 @@
 
 ## Quick Start
 
+### Eclipse
+
+#### Run the tests
+
+* Right click on path `test` in the project browser and chose `Run all tests`
+
+#### Run the Server
+
+* Right click on `Application` in `src` within the project browser and chose `Run`
+
+
 ### IntelliJ
 
 * import project to IntelliJ
@@ -17,6 +28,19 @@ from project root.
 
 ### Command line
 
-* `./run/run.sh` and open `http://localhost:4000`
+#### Build/Compile
+
+* run `./run/build.sh` from the project root path
+
+TODO: Compiling the tests doesn't work at the moment.
+Run the tests from Eclipse or Intellij first and then
+run `run/test.sh` to execute tests from command-line.
+
+#### Run the tests
+
 * `./run/test.sh` to run all tests from command line
+
+#### Run the server
+
+* `./run/run.sh` and open `http://localhost:4000`
 
