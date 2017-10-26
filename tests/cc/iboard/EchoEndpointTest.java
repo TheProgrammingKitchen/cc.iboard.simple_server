@@ -1,6 +1,6 @@
 package cc.iboard;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class EchoEndpointTest {
       assertTrue(response.body().contains("Request: Inspect"));	
       assertTrue(response.body().contains("Parameters:"));	
       assertTrue(response.body().contains("p1 = param1"));	
-      assertFalse(response.body().contains("p2 = param2"));	
+      assertFalse(response.body().contains("p2 = param2"));
 	}
 	
 	@Test
