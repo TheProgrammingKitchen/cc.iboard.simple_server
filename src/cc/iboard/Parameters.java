@@ -25,17 +25,14 @@ public class Parameters {
 	 * Returns parsed parameters as a map of key/value pairs.
 	 * @return
 	 */
-	public HashMap<String,String> map() {
-		return params;
-	}
+	public HashMap<String,String> map() { return params; }
 
     /**
      * Get all keys as a string-array
      * @return
      */
 	public String[] keys() {
-	    List<String> keys = new ArrayList<String>();
-	    params.forEach( (k,_v) -> { keys.add(k); });
+	    List<String> keys = getParamKeys();
 	    return listToStringArray(keys);
 	}
 
@@ -44,9 +41,8 @@ public class Parameters {
      * @return
      */
 	public String[] values() {
-	    List<String> keys = new ArrayList<String>();
-	    params.forEach( (_k,v) -> { keys.add(v); });
-	    return listToStringArray(keys);
+	    List<String> values = getParamValues();
+	    return listToStringArray(values);
 	}
 	
 	/**
@@ -61,6 +57,18 @@ public class Parameters {
 
     // IMPLEMENTATION
     
+    private List<String> getParamKeys() {
+        List<String> keys = new ArrayList<String>();
+	    params.forEach( (k,_v) -> { keys.add(k); });
+        return keys;
+    }
+
+    private List<String> getParamValues() {
+        List<String> values = new ArrayList<String>();
+	    params.forEach( (_k,v) -> { values.add(v); });
+        return values;
+    }
+
 	private String[] listToStringArray(List<String> keys) {
 		String[] keyArray = new String[keys.size()];
 	    return keys.toArray(keyArray);
@@ -68,19 +76,23 @@ public class Parameters {
 	
 	private void extractParameters(String requestString) {
 	    String paramsString = extractParamsString(requestString);
-	    if(paramsString == "")
-	        return;
-
 	    extractParamMap(paramsString);
 	}
 
 	private void extractParamMap(String paramsString) {
+	    if(paramsString.isEmpty())
+	        return;
+
 		String[] allParams = paramsString.split("\\&");
-	    for( int i=0; i < allParams.length; i++) {
+	    addParamsToMap(allParams);
+	}
+
+    private void addParamsToMap(String[] allParams) {
+        for( int i=0; i < allParams.length; i++) {
 	      String[] p = allParams[i].split("=");
 	      params.put(p[0], p[1]);
 	    }
-	}
+    }
 
 	private String extractParamsString(String requestString) {
 		String paramsString;

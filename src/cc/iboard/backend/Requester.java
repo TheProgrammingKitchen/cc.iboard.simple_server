@@ -2,6 +2,7 @@ package cc.iboard.backend;
 
 import cc.iboard.endpoints.Endpoint;
 import cc.iboard.endpoints.EndpointFactory;
+import cc.iboard.endpoints.EndpointNotFound;
 import cc.iboard.endpoints.Index;
 import cc.iboard.endpoints.NotFound;
 
@@ -55,7 +56,7 @@ class Requester {
             endpoint = new Index();
         else try {
             endpoint = EndpointFactory.INSTANCE.createEndpoint(path);
-        } catch (Exception e) {
+        } catch (EndpointNotFound e) {
             endpoint = new NotFound();
         }
         return endpoint;

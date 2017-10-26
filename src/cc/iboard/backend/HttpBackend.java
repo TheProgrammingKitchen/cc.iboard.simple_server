@@ -48,9 +48,7 @@ public class HttpBackend implements BackendInterface {
     // PUBLIC API
 
     @Override
-    public void start() {
-        startHttpServer();
-    }
+    public void start() { startHttpServer(); }
 
     @Override
     public Response request(String _method, String requestString) {
@@ -58,9 +56,7 @@ public class HttpBackend implements BackendInterface {
     }
 
     @Override
-    public void stop() {
-        server.stop(0);
-    }
+    public void stop() { server.stop(0); }
 
 
 
@@ -122,7 +118,7 @@ public class HttpBackend implements BackendInterface {
 
     private Response directCallWarning(String requestString) {
         String msg = "Backend Handle was called directly in HttpBackend with: " +
-                requestString;
+                     requestString;
         logger.log(Level.WARNING,msg);
         return new Response(Response.HTTP_FORBIDDEN, msg);
     }

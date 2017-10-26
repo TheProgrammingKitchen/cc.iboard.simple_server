@@ -3,7 +3,7 @@ package cc.iboard.html;
 /**
  * Some HTML-Helper methods.
  */
-public class Html {
+final public class Html {
 
 	private static final String CSS_URL = "https://s3.eu-central-1.amazonaws.com/iboard.core/static/iboard.css";
 

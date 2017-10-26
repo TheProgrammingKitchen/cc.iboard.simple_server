@@ -17,17 +17,11 @@ public class Request {
 
     // API
     
-	public String method() {
-		return method;
-	}
+	public String method() { return method; }
 
-	public String path() {
-		return path;
-	}
+	public String path() { return path; }
 
-	public Parameters parameters() {
-		return parameters;
-	}
+	public Parameters parameters() { return parameters; }
 
     // IMPLEMENTATION
     
@@ -35,7 +29,5 @@ public class Request {
 	  String[] parts = queryString.split("\\?");
       return parts[0];
 	}
-
-
 
 }

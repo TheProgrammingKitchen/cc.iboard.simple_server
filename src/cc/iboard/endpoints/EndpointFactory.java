@@ -10,48 +10,56 @@ import java.util.regex.Pattern;
 public enum EndpointFactory {
     INSTANCE;
 
-    public Endpoint createEndpoint(String queryString) throws Exception {
-       String[] parts = queryString.split("\\?", Pattern.LITERAL);
-       String path = parts[0];
-       //String _params = parts[1];
-       parts = path.split("\\/");
-       String handlerName = parts[0];
-       return newHandler(handlerName);
-    }
+    public Endpoint createEndpoint(String queryString) throws EndpointNotFound {
+        String endpointName = determineEndpointName(queryString);
+        return newEndpoint(endpointName);
+    };
 
-    // Helpers
+    // IMPLEMENTATION
 
-    private Endpoint newHandler(String handlerName) throws Exception {
+    private Endpoint newEndpoint(String handlerName) throws EndpointNotFound {
         try {
-            return newHandlerByName(handlerName);
+            return newEndpointByName(handlerName);
         } catch (Exception e) {
-            throw new Exception("Endpoint not found: " + handlerName + e.getMessage());
+            throw new EndpointNotFound(handlerName, e);
         }
-    }
+    };
 
-    private Endpoint newHandlerByName(String handlerName)
+    private Endpoint newEndpointByName(String handlerName)
             throws IllegalArgumentException, 
-            		   InvocationTargetException, 
-            		   NoSuchMethodException, 
-            		   SecurityException, 
-            		   InstantiationException, 
-            		   IllegalAccessException, 
-            		   ClassNotFoundException
+            InvocationTargetException, 
+            NoSuchMethodException, 
+            SecurityException, 
+            InstantiationException, 
+            IllegalAccessException, 
+            ClassNotFoundException
     {
-		String className = getClassName(handlerName);
-		return (Endpoint) getConstructor(className).newInstance();
+        String className = getClassName(handlerName);
+        return (Endpoint) getConstructor(className).newInstance();
+    };
+
+    private Constructor<?> getConstructor(String className) throws NoSuchMethodException, ClassNotFoundException {
+        return Class.forName(className).getDeclaredConstructor();
+    };
+
+    private String getClassName(String handlerName) {
+        return getPackageName() + "." + handlerName;
+    };
+
+    private String getPackageName() {
+        return Endpoint.class.getPackage().getName();
+    };
+
+    private String determineEndpointName(String queryString) {
+        String path = getPath(queryString);
+        return getEndpointFromPath(path);
     }
 
-	private Constructor<?> getConstructor(String className) throws NoSuchMethodException, ClassNotFoundException {
-		return Class.forName(className).getDeclaredConstructor();
-	}
+    private String getEndpointFromPath(String path) {
+        return path.split("\\/")[0];
+    }
 
-	private String getClassName(String handlerName) {
-		return getPackageName() + "." + handlerName;
-	}
-
-	private String getPackageName() {
-		return Endpoint.class.getPackage().getName();
-	}
-
+    private String getPath(String queryString) {
+        return queryString.split("\\?", Pattern.LITERAL)[0];
+    };
 }

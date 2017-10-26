@@ -14,10 +14,7 @@ public class Response {
 		this.body = body;
 	};
 
-	public String body() {
-		return body;
-	}
-	public int status() {
-		return status;
-	}
+	public String body() { return body; }
+	public int status() { return status; }
+	
 }

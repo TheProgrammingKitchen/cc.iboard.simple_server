@@ -11,17 +11,14 @@ public class TestBackend implements BackendInterface {
     private final Requester responder = new Requester();
 
     @Override
-    public void start() {
-      // NOOP
-    }
+    public void start() { /* NOOP */ }
+
+    @Override
+    public void stop() { /* NOOP */ }
 
     @Override
     public Response request(String method, String requestString) {
         return responder.request(method, requestString);
     }
 
-    @Override
-    public void stop() {
-      // NOOP
-    }
 }
