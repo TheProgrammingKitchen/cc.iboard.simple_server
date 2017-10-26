@@ -16,8 +16,6 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.junit.jupiter.api.Tag;
-
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -34,13 +32,12 @@ import com.sun.net.httpserver.HttpServer;
  * The server will not be stopped and blocks until
  * Ctrl-C is pressed by the user or the process is killed.
  */
- @Tag("DoNotTest")
 public class HttpBackend implements BackendInterface {
 
 	private int port = 8000 ;
     private static HttpServer server;
     private final Logger logger = Logger.getLogger(this.getClass().getName());
-    private static final Responder responder = new Responder();
+    private static final Requester requester = new Requester();
 
     public HttpBackend(int port) {
         this.port = port;
@@ -56,7 +53,7 @@ public class HttpBackend implements BackendInterface {
     }
 
     @Override
-    public Response handle(String _method, String requestString) {
+    public Response request(String _method, String requestString) {
         return directCallWarning(requestString);
     }
 
@@ -101,10 +98,14 @@ public class HttpBackend implements BackendInterface {
         return first.toUpperCase() + req;   // Upcase first character and append the rest
     }
 
-    private static String extractPathWithQuery(HttpExchange t) {
-        URI uri = t.getRequestURI();
-        return uri.getPath() + "?" + uri.getQuery();
-    }
+	private static String extractPathWithQuery(HttpExchange t) {
+		URI uri = t.getRequestURI();
+		String query = uri.getQuery();
+		if (query == null) 
+			return uri.getPath();
+		else
+			return uri.getPath() + "?" + uri.getQuery();
+	}
 
     private void createHttpServer() {
         try {
@@ -135,7 +136,7 @@ public class HttpBackend implements BackendInterface {
         }
 
         Response serve(String method, String path) {
-            return responder.respondTo(method,path);
+            return requester.request(method,path);
         }
 
     }

@@ -118,4 +118,8 @@ public class Html {
 	public static String a(String title, String link) {
 		return "<a href=\"" + link + "\">" + title + "</a>";
 	}
+
+	public static String pre(String string) {
+		return "<pre>" + string + "</pre>\n";
+	}
 }

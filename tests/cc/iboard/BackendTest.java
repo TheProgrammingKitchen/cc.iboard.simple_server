@@ -49,6 +49,6 @@ class BackendTest {
     }
 
     private Response send(String path) {
-        return backend.handle("GET", path);
+        return backend.request("GET", path);
     }
 }

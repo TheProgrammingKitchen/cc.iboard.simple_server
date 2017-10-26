@@ -29,7 +29,7 @@ public class Inspect extends Endpoint {
       StringBuilder output = new StringBuilder();
       params.forEach( (Entry<String, String> param) -> {
         output.append(
-          Html.p(param.getKey() + " = " + param.getValue().toString())
+          Html.pre(param.getKey() + " = " + param.getValue().toString())
         );
       });
       return output.toString();

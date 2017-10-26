@@ -14,9 +14,9 @@ class EchoEndpointTest {
     
 	@Test
 	void testEchoResponseWithOneParameter() {
-	  Response response = send("Echo?p1=param1");
+	  Response response = send("Inspect?p1=param1");
 	  System.out.println( response.body() );
-      assertTrue(response.body().contains("Request: Echo"));	
+      assertTrue(response.body().contains("Request: Inspect"));	
       assertTrue(response.body().contains("Parameters:"));	
       assertTrue(response.body().contains("p1 = param1"));	
       assertFalse(response.body().contains("p2 = param2"));	
@@ -24,9 +24,9 @@ class EchoEndpointTest {
 	
 	@Test
 	void testEchoResponseWithTwoParameters() {
-	  Response response = send("Echo?p1=param1&p2=param2");
+	  Response response = send("Inspect?p1=param1&p2=param2");
 	  System.out.println( response.body() );
-      assertTrue(response.body().contains("Request: Echo"));	
+      assertTrue(response.body().contains("Request: Inspect"));	
       assertTrue(response.body().contains("Parameters:"));	
       assertTrue(response.body().contains("p1 = param1"));	
       assertTrue(response.body().contains("p2 = param2"));	
@@ -36,6 +36,6 @@ class EchoEndpointTest {
 	
 	
     private Response send(String path) {
-        return backend.handle("GET", path);
+        return backend.request("GET", path);
     }
 }

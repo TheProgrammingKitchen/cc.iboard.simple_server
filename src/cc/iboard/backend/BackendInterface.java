@@ -7,11 +7,11 @@ package cc.iboard.backend;
  *
  * `start` and `stop` may be a NOOP (eg in TestBackend)
  *
- * @see Responder
+ * @see Requester
  * @see TestBackend
  */
 interface BackendInterface {
     void start();
-	Response handle(String method, String requestString);
+	Response request(String method, String requestString);
     void stop();
 }

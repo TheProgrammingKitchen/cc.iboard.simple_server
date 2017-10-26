@@ -11,10 +11,10 @@ public class Request {
 	private List<Entry<String,String>> parameters;
 	private String path;
 
-	public Request(String method, String queryString) {
+	public Request(String method, String requestString) {
 		this.method = method;
-		this.path = extractPath(queryString);
-		this.parameters = extractParameters(queryString);
+		this.path = extractPath(requestString);
+		this.parameters = extractParameters(requestString);
 	}
 
 	public String method() {
@@ -29,9 +29,9 @@ public class Request {
 		return parameters;
 	}
 
-	private List<Entry<String,String>> extractParameters(String queryString) {
+	private List<Entry<String,String>> extractParameters(String requestString) {
         List<Map.Entry<String, String>> params = new ArrayList<>();
-	    String[] parts = queryString.split("\\?");
+	    String[] parts = requestString.split("\\?");
 	    String paramsString;
 		if (parts.length > 1)
 			paramsString = parts[1];

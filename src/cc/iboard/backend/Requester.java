@@ -7,7 +7,7 @@ import cc.iboard.html.Html;
 
 /**
  *  <p>
- *      The `Responder` tries to create a `Endpoint` from the path given
+ *      The `Requester` tries to create a `Endpoint` from the path given
  *  as a parameter.
  *  <p>
  *      The default endpoints is `Index` for "/" and "".
@@ -20,21 +20,23 @@ import cc.iboard.html.Html;
  *  <p>
  *  Example:
  *  <pre>{@code
- *        private Responder responder = new Responder();
+ *        private Requester requester = new Requester();
  *        //....
- *        return responder.getBody(path);
+ *        Response response = requester.request("GET", "/resource?param=value");
+ *        println(response.body());   // Some text
+ *        println(response.status()); // 200, 404, ...
  *  }</pre>
  */
-class Responder {
+class Requester {
 
     /**
      * @param path    the first part of the path, eg `/index` is used to find the proper `Endpoint`.
      * @param msg 
      * @return String the body returned from the `Endpoint.respond()` function.
      * @see Endpoint
-     * @see Responder
+     * @see Requester
      */
-    public Response respondTo(String method, String path) {
+    public Response request(String method, String path) {
         Endpoint endpoint;
         Request request = new Request(method,path);
 

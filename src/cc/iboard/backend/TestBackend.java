@@ -5,10 +5,10 @@ package cc.iboard.backend;
  * `handle(requestStr)` delegates the request to
  * the `Responder.getBody` method.
  *
- * @see Responder
+ * @see Requester
  */
 public class TestBackend implements BackendInterface {
-    private final Responder responder = new Responder();
+    private final Requester responder = new Requester();
 
     @Override
     public void start() {
@@ -16,8 +16,8 @@ public class TestBackend implements BackendInterface {
     }
 
     @Override
-    public Response handle(String method, String requestString) {
-        return responder.respondTo(method, requestString);
+    public Response request(String method, String requestString) {
+        return responder.request(method, requestString);
     }
 
     @Override
