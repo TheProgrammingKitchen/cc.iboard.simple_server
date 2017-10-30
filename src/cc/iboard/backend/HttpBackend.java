@@ -69,7 +69,7 @@ public class HttpBackend implements BackendInterface {
         os.close();
     }
 
-    private static String getHandlerName(HttpExchange t) {
+    private static String getQueryString(HttpExchange t) {
         String path = extractPathWithQuery(t);
         if ( isRootPath(path) )
             return "Index";
@@ -127,7 +127,7 @@ public class HttpBackend implements BackendInterface {
 
         @Override
         public void handle(HttpExchange t) throws IOException {
-            Response response = serve(extractMethod(t), getHandlerName(t));
+            Response response = serve(extractMethod(t), getQueryString(t));
             sendResponse(t, response);
         }
 
