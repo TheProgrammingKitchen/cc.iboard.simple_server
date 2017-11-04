@@ -6,11 +6,11 @@
 
 #### Run the tests
 
-* Right click on path `test` in the project browser and chose `Run all tests`
+* Right click on path `test` in the project browser and choose `Run all tests`
 
 #### Run the Server
 
-* Right click on `Application` in `src` within the project browser and chose `Run`
+* Right click on `Application` in `src` within the project browser and choose `Run`
 
 
 ### IntelliJ
@@ -21,7 +21,7 @@
 If you run `run.sh` and `test.sh` from within IntelliJ
 change the working path to the project root.
 
-Right click on `run.sh` and chose run usually starts the
+Right click on `run.sh` and choose run usually starts the
 script in directory `run` but the script is meant to run
 from project root.
 
