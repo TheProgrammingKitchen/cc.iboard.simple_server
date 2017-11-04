@@ -74,9 +74,8 @@ public class HttpBackend implements BackendInterface {
         if ( isRootPath(path) )
             return "Index";
 
-        return upcaseFirstChar(path);
+        return BackendHelper.upcaseFirstChar(path);
     }
-
 
     private static boolean isRootPath(String path) {
         if (path == null)
@@ -86,12 +85,6 @@ public class HttpBackend implements BackendInterface {
 
     private static String extractMethod(HttpExchange t) {
         return t.getRequestMethod().toUpperCase();
-    }
-
-    private static String upcaseFirstChar(String path) {
-        String req = path.substring(2);     // ignore slash and first character
-        String first = path.substring(1,2); // get the first character
-        return first.toUpperCase() + req;   // Upcase first character and append the rest
     }
 
     private static String extractPathWithQuery(HttpExchange t) {

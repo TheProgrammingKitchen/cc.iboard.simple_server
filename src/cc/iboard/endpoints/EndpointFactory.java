@@ -1,5 +1,7 @@
 package cc.iboard.endpoints;
 
+import cc.iboard.backend.BackendHelper;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Pattern;
@@ -56,7 +58,9 @@ public enum EndpointFactory {
     }
 
     private String getEndpointFromPath(String path) {
-        return path.split("\\/")[0];
+        String[] parts = path.split("\\/");
+        String be = parts.length > 1 ? parts[1] : parts[0];
+        return BackendHelper.upcaseFirstChar(be);
     }
 
     private String getPath(String queryString) {
