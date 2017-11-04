@@ -21,25 +21,6 @@ class BackendTest {
     }
 
     @Test
-    void testStateResponse() {
-        Response response = TestHelper.send(backend,"/state");
-        assertTrue(response.body().contains("Running"));
-    }
-    @Test
-    void testIndexPageResponse() {
-        Response response = TestHelper.send(backend,"/index");
-        assertTrue(response.body().contains("<html>"));
-        assertTrue(response.body().contains(Html.title()));
-    }
-
-    @Test
-    void testDefaultPageResponse() {
-        Response response = TestHelper.send(backend,"/");
-        assertTrue(response.body().contains("<html>"));
-        assertTrue(response.body().contains(Html.title()));
-    }
-
-    @Test
     void testTestBackendImplementation() {
         // Because Java is stupid and we have to overwrite
         // abstract methods even if not needed.
