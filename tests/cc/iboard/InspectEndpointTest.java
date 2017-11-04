@@ -30,4 +30,6 @@ class InspectEndpointTest {
         assertTrue(response.body().contains("p2 = param2"));	
     }
 
+    //TODO: Test /inspect/some/part?param=1 should see some = part
+
 }
