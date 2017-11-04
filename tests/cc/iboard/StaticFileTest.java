@@ -15,8 +15,15 @@ class StaticFileTest {
         String expected = "For now, this file is for testing purposes only.";
         Response response = TestHelper.send(backend,"/assets/README.md");
         String current = response.body();
-        System.out.println(current);
         assertTrue( current.contains(expected));
+    }
+
+    @Test
+    void testNotExistingFile() {
+        String expectedBody = "File '/assets/not_existing_file' doesn't exist or is not readable.";
+        Response response = TestHelper.send(backend,"/assets/not_existing_file");
+        assertEquals(Response.HTTP_NOT_FOUND, response.status());
+        assertEquals(response.body(), expectedBody );
     }
 
 }

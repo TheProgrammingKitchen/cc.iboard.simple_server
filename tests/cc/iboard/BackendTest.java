@@ -48,4 +48,10 @@ class BackendTest {
         assertTrue(true);
     }
 
+    @Test
+    void testNotExistingEndpointsRespondWith404() {
+        Response response = TestHelper.send(backend,"/notExistingEndpoint");
+        assertEquals(Response.HTTP_NOT_FOUND, response.status());
+    }
+
 }

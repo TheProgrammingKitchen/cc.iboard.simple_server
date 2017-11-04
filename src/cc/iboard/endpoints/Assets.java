@@ -17,29 +17,34 @@ public class Assets extends Endpoint {
 
     @Override
     public Response respond(Request request) {
-        return new Response(Response.HTTP_OK, renderResponse(request));
+        try {
+            return new Response(Response.HTTP_OK, renderResponse(request));
+        } catch (IOException _e) {
+            return new Response(Response.HTTP_NOT_FOUND, renderError(request));
+        }
     }
 
-    private String renderResponse(Request request) {
+    private String renderError(Request request) {
+        return String.format("File '%s' doesn't exist or is not readable.", request.path());
+    }
+
+    private String renderResponse(Request request) throws IOException {
         String filePath = extractFilePath(request);
         return readFile(filePath);
     }
 
-    private String readFile(String filePath) {
+    private String readFile(String filePath) throws IOException {
         Path path = FileSystems.getDefault().getPath(".", filePath );
         return fileContent(path);
     }
 
-    private String fileContent(Path path) {
+    private String fileContent(Path path) throws IOException {
         Charset charset = Charset.forName("UTF-8");
         StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                content.append(line + "\n");
-            }
-        } catch (IOException x) {
-            System.err.format("IOException: %s%n", x);
+        BufferedReader reader = Files.newBufferedReader(path, charset);
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            content.append(line + "\n");
         }
         return content.toString();
     }
