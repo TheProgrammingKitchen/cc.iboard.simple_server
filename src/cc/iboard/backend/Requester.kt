@@ -70,8 +70,7 @@ internal class Requester {
         return endpoint
     }
 
-    private fun isRootPath(path: String): Boolean {
-        return path == "/" || path == ""
-    }
+    private fun isRootPath(path: String)
+            : Boolean = path == "/" || path == ""
 
 }

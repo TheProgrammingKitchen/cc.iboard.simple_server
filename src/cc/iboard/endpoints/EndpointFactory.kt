@@ -22,8 +22,8 @@ enum class EndpointFactory {
 
     @Throws(EndpointNotFound::class)
     private fun newEndpoint(handlerName: String): Endpoint {
-        try {
-            return newEndpointByName(handlerName)
+        return try {
+            newEndpointByName(handlerName)
         } catch (e: Exception) {
             throw EndpointNotFound(handlerName, e)
         }
@@ -37,13 +37,11 @@ enum class EndpointFactory {
     }
 
     @Throws(NoSuchMethodException::class, ClassNotFoundException::class)
-    private fun getConstructor(className: String): Constructor<*> {
-        return Class.forName(className).getDeclaredConstructor()
-    }
+    private fun getConstructor(className: String)
+            : Constructor<*> = Class.forName(className).getDeclaredConstructor()
 
-    private fun getClassName(handlerName: String): String {
-        return packageName + "." + handlerName
-    }
+    private fun getClassName(handlerName: String)
+            : String = packageName + "." + handlerName
 
     private val packageName: String
         get() = Endpoint::class.java.`package`.name
@@ -54,12 +52,15 @@ enum class EndpointFactory {
     }
 
     private fun getEndpointFromPath(path: String): String {
-        val parts = path.split("\\/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val parts = path.split("\\/".toRegex())
+                .dropLastWhile { it.isEmpty() }
+                .toTypedArray()
         val be = if (parts.size > 1) parts[1] else parts[0]
         return BackendHelper.upcaseFirstChar(be)
     }
 
-    private fun getPath(queryString: String): String {
-        return queryString.split("\\?".toRegex(), Pattern.LITERAL).toTypedArray()[0]
-    }
+    private fun getPath(queryString: String): String =
+            queryString.split("\\?".toRegex(), Pattern.LITERAL)
+                    .toTypedArray()
+                    .first()
 }

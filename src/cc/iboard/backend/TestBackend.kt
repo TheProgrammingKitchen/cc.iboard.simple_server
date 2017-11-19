@@ -10,14 +10,11 @@ package cc.iboard.backend
 class TestBackend : BackendInterface {
     private val responder = Requester()
 
-    override fun start() { /* NOOP */
-    }
+    override fun start() =/* NOOP */Unit
 
-    override fun stop() { /* NOOP */
-    }
+    override fun stop() =/* NOOP */Unit
 
-    override fun request(method: String, requestString: String): Response {
-        return responder.request(method, requestString)
-    }
+    override fun request(method: String, requestString: String)
+            : Response = responder.request(method, requestString)
 
 }

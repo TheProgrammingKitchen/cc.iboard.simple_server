@@ -16,23 +16,18 @@ class Request
 
     // API
 
-    fun method(): String {
-        return method
-    }
-
-    fun path(): String {
-        return path
-    }
-
-    fun parameters(): Parameters {
-        return parameters
-    }
+    fun method(): String = method
+    fun path(): String = path
+    fun parameters(): Parameters = parameters
 
     // IMPLEMENTATION
 
     private fun extractPath(queryString: String): String {
-        val parts = queryString.split("\\?".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        return parts[0]
+        return queryString
+                .split("\\?".toRegex())
+                .dropLastWhile { it.isEmpty() }
+                .toTypedArray()
+                .first()
     }
 
 }

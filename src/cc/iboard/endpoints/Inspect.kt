@@ -9,9 +9,8 @@ import cc.iboard.html.Html
  * It shows the query, extracted parameters, and body.
  */
 class Inspect : Endpoint() {
-    override fun respond(request: Request): Response {
-        return Response(Response.HTTP_OK, renderResponse(request))
-    }
+    override fun respond(request: Request)
+            : Response = Response(Response.HTTP_OK, renderResponse(request))
 
     // IMPLEMENTATION
 

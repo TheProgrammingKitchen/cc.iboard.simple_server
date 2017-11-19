@@ -20,9 +20,7 @@ object Html {
      * everythin in between
      * @return String
      */
-    private fun head(headers: String): String {
-        return "<head>\n$headers\n</head>\n"
-    }
+    private fun head(headers: String): String = "<head>\n$headers\n</head>\n"
 
     /**
      * Return a link rel for the given css file
@@ -31,17 +29,13 @@ object Html {
      * of the css-file
      * @return String
      */
-    private fun stylesheet(url: String): String {
-        return "<link rel=\"stylesheet\" href=\"$url\" />"
-
-    }
+    private fun stylesheet(url: String)
+            : String = "<link rel=\"stylesheet\" href=\"$url\" />"
 
     /**
      * @return String – the title of the html-page
      */
-    fun title(): String {
-        return "iboard.cc - index"
-    }
+    fun title(): String = "iboard.cc - index"
 
     /**
      * Wrapper for h1 tags
@@ -50,9 +44,7 @@ object Html {
      * inside H1
      * @return String with text inside H1 tag
      */
-    fun h1(text: String): String {
-        return "<h1>$text</h1>"
-    }
+    fun h1(text: String): String = "<h1>$text</h1>"
 
     /**
      * Body Wrapper
@@ -61,9 +53,7 @@ object Html {
      * everything in between
      * @return the body of the html-page
      */
-    fun body(content: String): String {
-        return "<body>\n$content\n</body>"
-    }
+    fun body(content: String): String = "<body>\n$content\n</body>"
 
     /**
      * Wrapper for the entire html-page
@@ -72,9 +62,7 @@ object Html {
      * of the page
      * @return The entire html-respond body
      */
-    fun html(content: String): String {
-        return "<html>\n$content\n</html>"
-    }
+    fun html(content: String): String = "<html>\n$content\n</html>"
 
     /**
      * Wrapper for p-tags
@@ -87,32 +75,28 @@ object Html {
      *
      * @return the paragraph string
      */
-    fun p(text: String): String {
-        return "<p>$text</p>\n"
-    }
+    fun p(text: String): String = "<p>$text</p>\n"
 
     /**
      * @return some longer text to be used for mockups.
      */
-    fun lorem(): String {
-        return "Lorem ipsum dolor sit amet, consectetur adipiscing elit."   +
-        "In convallis euismod quam sit amet lobortis. Ut auctor "           +
-        "urna at ante ultrices, eget pellentesque sapien ultrices. "        +
-        "In aliquet odio non suscipit fringilla. Donec pretium "            +
-        "luctus turpis vitae ullamcorper. Vestibulum condimentum, "         +
-        "purus in euismod porttitor, lacus quam commodo risus, nec "        +
-        "volutpat lectus elit malesuada purus. Aliquam sed magna "          +
-        "euismod, cursus lectus non, accumsan urna. Donec pellentesque "    +
-        "sapien non nisl blandit elementum. In hac habitasse platea "       +
-        "dictumst. Aenean pharetra vel mi ac ornare. Proin sed turpis "     +
-        "eleifend, dapibus dolor vel, sagittis lacus. Aliquam faucibus "    +
-        "rutrum consectetur. Sed imperdiet nec neque vitae vestibulum. "    +
-        "In faucibus, est ut cursus rutrum, massa augue interdum nulla, "   +
-        "in tempus ex erat ac neque. Phasellus laoreet lacus sed "          +
-        "ultrices auctor. Integer diam massa, commodo sed metus ac, "       +
-        "lacinia porta lectus.\n"                                           +
-        "\n"
-    }
+    fun lorem(): String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."   +
+    "In convallis euismod quam sit amet lobortis. Ut auctor "           +
+    "urna at ante ultrices, eget pellentesque sapien ultrices. "        +
+    "In aliquet odio non suscipit fringilla. Donec pretium "            +
+    "luctus turpis vitae ullamcorper. Vestibulum condimentum, "         +
+    "purus in euismod porttitor, lacus quam commodo risus, nec "        +
+    "volutpat lectus elit malesuada purus. Aliquam sed magna "          +
+    "euismod, cursus lectus non, accumsan urna. Donec pellentesque "    +
+    "sapien non nisl blandit elementum. In hac habitasse platea "       +
+    "dictumst. Aenean pharetra vel mi ac ornare. Proin sed turpis "     +
+    "eleifend, dapibus dolor vel, sagittis lacus. Aliquam faucibus "    +
+    "rutrum consectetur. Sed imperdiet nec neque vitae vestibulum. "    +
+    "In faucibus, est ut cursus rutrum, massa augue interdum nulla, "   +
+    "in tempus ex erat ac neque. Phasellus laoreet lacus sed "          +
+    "ultrices auctor. Integer diam massa, commodo sed metus ac, "       +
+    "lacinia porta lectus.\n"                                           +
+    "\n"
 
     /**
      * Return a html-link
@@ -120,18 +104,14 @@ object Html {
      * @param link url-string
      * @return
      */
-    fun a(title: String, link: String): String {
-        return "<a href=\"$link\">$title</a>"
-    }
+    fun a(title: String, link: String): String = "<a href=\"$link\">$title</a>"
 
     /**
      * Wrap string with <pre>
      * @param string
      * @return
     </pre> */
-    fun pre(string: String): String {
-        return "<pre>$string</pre>\n"
-    }
+    fun pre(string: String): String = "<pre>$string</pre>\n"
 
     /**
      * Render a standard page with the given title.

@@ -88,9 +88,8 @@ class HttpBackend(port:Int) : BackendInterface {
          sendResponse(t, response)
       }
 
-      fun serve(method:String, path:String):Response {
-         return requester.request(method, path)
-      }
+      private fun serve(method:String, path:String)
+              :Response = requester.request(method, path)
 
    }
 
@@ -105,36 +104,35 @@ class HttpBackend(port:Int) : BackendInterface {
       @Throws(IOException::class)
       private fun sendResponse(t:HttpExchange, response:Response) {
          t.sendResponseHeaders(response.status(), response.body().length.toLong())
-         val os = t.getResponseBody()
+         val os = t.responseBody
          os.write(response.body().toByteArray())
          os.close()
       }
 
       private fun getQueryString(t:HttpExchange):String {
          val path = extractPathWithQuery(t)
-         if (isRootPath(path))
-            return "Index"
-
-         return BackendHelper.upcaseFirstChar(path)
+         return if (isRootPath(path))
+            "Index"
+         else
+            BackendHelper.upcaseFirstChar(path)
       }
 
       private fun isRootPath(path:String?):Boolean {
-         if (path == null)
-            return true
-         return path == "/"
+         return if (path == null)
+            true
+         else path == "/"
       }
 
-      private fun extractMethod(t:HttpExchange):String {
-         return t.getRequestMethod().toUpperCase()
-      }
+      private fun extractMethod(t:HttpExchange)
+              :String = t.requestMethod.toUpperCase()
 
       private fun extractPathWithQuery(t:HttpExchange):String {
-         val uri = t.getRequestURI()
-         val query = uri.getQuery()
-         if (query == null)
-            return uri.getPath()
+         val uri = t.requestURI
+         val query = uri.query
+         return if (query == null)
+            uri.path
          else
-            return uri.getPath() + "?" + uri.getQuery()
+            uri.path + "?" + uri.query
       }
    }
 

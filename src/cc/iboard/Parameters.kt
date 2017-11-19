@@ -25,27 +25,19 @@ class Parameters
      * Returns parsed parameters as a map of key/value pairs.
      * @return
      */
-    fun map(): HashMap<String, String> {
-        return params
-    }
+    fun map(): HashMap<String, String> = params
 
     /**
      * Get all keys as a string-array
      * @return
      */
-    fun keys(): Array<String> {
-        val keys = paramKeys
-        return listToStringArray(keys)
-    }
+    fun keys(): Array<String> = listToStringArray(paramKeys)
 
     /**
      * Return all values as a string-array
      * @return
      */
-    fun values(): Array<String> {
-        val values = paramValues
-        return listToStringArray(values)
-    }
+    fun values(): Array<String> = listToStringArray(paramValues)
 
     /**
      * Return the value of the given key
@@ -71,10 +63,8 @@ class Parameters
             return values
         }
 
-    private fun listToStringArray(keys: List<String>): Array<String> {
-        val keyArray = arrayOfNulls<String>(keys.size)
-        return keys.toTypedArray()
-    }
+    private fun listToStringArray(keys: List<String>)
+            : Array<String> = keys.toTypedArray()
 
     private fun extractParameters(requestString: String) {
         val paramsString = extractParamsString(requestString)
@@ -85,25 +75,29 @@ class Parameters
         if (paramsString.isEmpty())
             return
 
-        val allParams = paramsString.split("\\&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val allParams = paramsString
+                .split("\\&".toRegex())
+                .dropLastWhile { it.isEmpty() }
+                .toTypedArray()
         addParamsToMap(allParams)
     }
 
     private fun addParamsToMap(allParams: Array<String>) {
-        for (i in allParams.indices) {
-            val p = allParams[i].split("=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-            params.put(p[0], p[1])
-        }
+        allParams.map { it.split("=".toRegex())
+                        .dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                      }
+                .forEach { params.put(it[0], it[1]) }
     }
 
     private fun extractParamsString(requestString: String): String {
-        val paramsString: String
-        val parts = requestString.split("\\?".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        if (parts.size > 1)
-            paramsString = parts[1]
+        val parts = requestString.split("\\?".toRegex())
+                .dropLastWhile { it.isEmpty() }
+                .toTypedArray()
+        return if (parts.size > 1)
+            parts[1]
         else
-            paramsString = ""
-        return paramsString
+            ""
     }
 
 }
