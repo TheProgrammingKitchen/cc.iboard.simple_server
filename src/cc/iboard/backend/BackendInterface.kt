@@ -1,4 +1,4 @@
-package cc.iboard.backend;
+package cc.iboard.backend
 
 /**
  * The `BackendInterface` is responsible to `start` and `stop` a backend. The
@@ -10,8 +10,8 @@ package cc.iboard.backend;
  * @see Requester
  * @see TestBackend
  */
-interface BackendInterface {
-    void start();
-    Response request(String method, String requestString);
-    void stop();
+internal interface BackendInterface {
+    fun start()
+    fun request(method: String, requestString: String): Response
+    fun stop()
 }

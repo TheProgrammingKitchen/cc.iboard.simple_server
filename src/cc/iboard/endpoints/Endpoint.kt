@@ -1,7 +1,7 @@
-package cc.iboard.endpoints;
+package cc.iboard.endpoints
 
-import cc.iboard.backend.Request;
-import cc.iboard.backend.Response;
+import cc.iboard.backend.Request
+import cc.iboard.backend.Response
 
 /**
  * Derive from class `Endpoint` to handle your requests.
@@ -12,8 +12,9 @@ import cc.iboard.backend.Response;
  * `MyRequest` from `Endpoint` and implement the `respond` function.
  *
  * @see Index
+ *
  * @see State
  */
-public abstract class Endpoint {
-    public abstract Response respond(Request request);
+abstract class Endpoint {
+    abstract fun respond(request: Request): Response
 }
