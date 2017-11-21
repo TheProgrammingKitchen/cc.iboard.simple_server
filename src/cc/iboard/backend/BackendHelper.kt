@@ -9,6 +9,9 @@ object BackendHelper {
     }
 
     fun stripFirstSlash(string: String): String {
-        return string.substring(1)     // ignore slash and first character
+        return if (string.first() == '/')
+          string.substring(1)     // ignore slash and first character
+        else
+          string
     }
 }
